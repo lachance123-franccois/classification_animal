@@ -1,6 +1,12 @@
 import torch
 import yaml
+import os
 import matplotlib.pyplot as plt
+config_path = os.path.join(os.path.dirname(__file__), "../config.yaml")
+with open(config_path) as f:
+    config = yaml.safe_load(f)
+
+
 def train_loop(model, train_loader, val_loader, loss_fn, optimizer, device, epochs):
     train_loss, val_loss = [], []
     train_acc, val_acc = [], []
@@ -40,8 +46,6 @@ def train_loop(model, train_loader, val_loader, loss_fn, optimizer, device, epoc
 
     
     return model,train_loss, train_acc, val_loss, val_acc
-with open("config.yaml") as f:
-    config = yaml.safe_load(f)
 #model,train_loss,train_acc,val_loss,val_acc=train_loop(config["num_class"],config["epochs"])
 
 

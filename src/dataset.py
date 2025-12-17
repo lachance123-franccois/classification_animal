@@ -5,8 +5,13 @@ import torch
 import os
 from torch.utils.data import Dataset,DataLoader
 import csv
+import yaml
 import pandas as pd
 from sklearn.model_selection import train_test_split
+config_path = os.path.join(os.path.dirname(__file__), "../config.yaml")
+with open(config_path) as f:
+    config = yaml.safe_load(f)
+
 
 class RECUPERATION_IMG(Dataset):
     def __init__(self, X, y,transform):
@@ -34,7 +39,7 @@ class RECUPERATION_IMG(Dataset):
         img=self.transform(img)
         return img,label
 try:
-        chemin=r"C:\Users\AWOUNANG\Desktop\CLASSIFICATION ANIMAL\datas"
+        chemin=r"C:\Users\AWOUNANG\Desktop\CLASSIFICATION ANIMAL\classification_animal\datas"
         folders =os.listdir(chemin)
 
         label_map={}
@@ -66,7 +71,7 @@ def loader_loop(csv_path,train_size,val_size):
        return train_dataset, test_dataset, val_dataset
 device = torch.device("cpu")
 batch_size=20
-train_dataset, val_dataset, test_dataset =loader_loop(csv_path="dataset.csv",train_size=0.4,val_size=0.5)
+train_dataset, val_dataset, test_dataset =loader_loop(csv_path=config["csv_path"],train_size=0.4,val_size=0.5)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)

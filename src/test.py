@@ -1,8 +1,15 @@
 import torch
+import os
+import sys
+config_path = os.path.join(os.path.dirname(__file__), "../config.yaml")
+chemin= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(chemin)
 from src.dataset import loader_loop
 import yaml
+import os
+import sys
 
-with open("config.yaml") as f:
+with open(config_path) as f:
     config = yaml.safe_load(f)
 
 train_dataset, val_dataset, test_dataset =loader_loop(config["csv_path"],train_size=None,val_size=None)

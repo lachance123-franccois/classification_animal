@@ -15,7 +15,8 @@ from src.dataset import loader_loop
 from torch.optim import  Adam
 import yaml
 DEVICE = torch.device("cpu")  # ou "cuda" si GPU
-with open("config.yaml") as f:
+config_path = os.path.join(os.path.dirname(__file__), "../config.yaml")
+with open(config_path) as f:
     config = yaml.safe_load(f)
 
 
