@@ -1,0 +1,7 @@
+csv_path : "dataset.csv"
+batch_size : 64
+num_class : 4
+epochs : 25
+train_size : 0.6
+val_size : 0.5
+batch_size : 10
